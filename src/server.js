@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectDB = require("./config/database");
 const gameRoutes = require("./routes/gameRoutes");
 const tournamentRoutes = require("./routes/tournamentRoutes");
+const playerRoutes = require("./routes/playerRoutes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/games", gameRoutes);
 app.use("/api/tournaments", tournamentRoutes);
+app.use("/api/players", playerRoutes);
 
 const PORT = process.env.PORT || 3000;
 
