@@ -25,4 +25,4 @@ jobs:
         run: npm ci
 
       - name: Validar sintaxis del código
-        run: node --check src/server.js
+        run: npm test

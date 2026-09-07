@@ -1,4 +1,7 @@
 const Game = require("../models/Game");
+const mongoose = require("mongoose");
+
+const hasValidId = (id) => mongoose.Types.ObjectId.isValid(id);
 
 const getGames = async (req, res) => {
   try {
@@ -11,6 +14,10 @@ const getGames = async (req, res) => {
 
 const getGameById = async (req, res) => {
   try {
+    if (!hasValidId(req.params.id)) {
+      return res.status(400).json({ message: "ID de videojuego inválido" });
+    }
+
     const game = await Game.findById(req.params.id);
     if (!game) return res.status(404).json({ message: "Videojuego no encontrado" });
     res.json(game);
@@ -30,6 +37,10 @@ const createGame = async (req, res) => {
 
 const updateGame = async (req, res) => {
   try {
+    if (!hasValidId(req.params.id)) {
+      return res.status(400).json({ message: "ID de videojuego inválido" });
+    }
+
     const game = await Game.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
@@ -43,6 +54,10 @@ const updateGame = async (req, res) => {
 
 const deleteGame = async (req, res) => {
   try {
+    if (!hasValidId(req.params.id)) {
+      return res.status(400).json({ message: "ID de videojuego inválido" });
+    }
+
     const game = await Game.findByIdAndDelete(req.params.id);
     if (!game) return res.status(404).json({ message: "Videojuego no encontrado" });
     res.json({ message: "Videojuego eliminado correctamente" });
