@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
       - name: Checkout del repositorio
         uses: actions/checkout@v4
 
@@ -20,6 +21,9 @@ jobs:
         with:
           node-version: 24.x
           cache: 'npm'
+
+      - name: echooo
+        run: echo ""
 
       - name: Instalar dependencias
         run: npm ci
